@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 app.use("/v1/authors", router);
-
+app.use("/v1/books", router);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT} `);
 })
