@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { body, param, validationResult } from "express-validator";
-import {getAllAuthors, createAuthor, getAuthorById} from '../controllers/author'
+import {getAllAuthors, createAuthor, getAuthorById, updateAuthor, deleteAuthor} from '../controllers/author'
 
 const router = Router();
 
@@ -26,5 +26,10 @@ router.post("/",[
     createAuthor(req,res)
 }
 );
+
+router.patch("/:id",
+    updateAuthor);
+
+    router.delete("/:id", deleteAuthor);
 
 export default router;

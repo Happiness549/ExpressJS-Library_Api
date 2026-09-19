@@ -1,7 +1,7 @@
 import {Request, Response} from 'express'
 import { Author } from '../models/author'
 
-export const authors: Author[] = [] ;
+let authors: Author[] = [] ;
 
 export const getAllAuthors = (req:Request, res: Response) => {
     res.status(200).json(authors)
@@ -25,3 +25,34 @@ export const createAuthor = (req: Request, res: Response) =>{
     authors.push(newUser);
     res.status(201).json(newUser);
 }
+
+export const updateAuthor = (req: Request, res: Response) => {
+
+    const {id} = req.params;
+    const updates: Partial<Author> = req.body
+    
+    const author = authors.find(author => author.id === parseInt(String(id)));
+    if(!author) return res.status(404).json({message: "Author not found"});
+
+    if(updates.name !== undefined) author.name = updates.name;
+    if (updates.surname !== undefined) author.surname = updates.surname;
+
+    res.status(200).json(author)
+  
+}
+
+export const deleteAuthor = (req: Request, res: Response) => {
+    const {id} = req.params;
+
+const authorIndex = authors.findIndex(author => author.id === parseInt(String(id)));
+
+if(authorIndex === -1){
+    return res.status(404).json({message: "Author not found"});
+
+}
+
+const deleteAuthor = authors.splice(authorIndex, 1);
+
+res.status(200).json(deleteAuthor[0]);
+
+};
