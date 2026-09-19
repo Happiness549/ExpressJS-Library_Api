@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { body, param, validationResult } from "express-validator";
-import { getAllBooks, getAllBooksById, createBooks, updateBook } from '../controllers/books';
+import { getAllBooks, getAllBooksById, createBooks, updateBook, deleteBook } from '../controllers/books';
 
 const bookRouter = Router();
 
@@ -29,5 +29,7 @@ bookRouter.post("/",[
 
 bookRouter.patch("/:id",
     updateBook);
+
+bookRouter.delete("/:id", deleteBook);
 
 export default bookRouter;

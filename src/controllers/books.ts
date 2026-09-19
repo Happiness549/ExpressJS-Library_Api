@@ -41,5 +41,21 @@ export const updateBook = (req: Request, res: Response) => {
 
     res.status(200).json(author)
   
+};
+
+export const deleteBook = (req: Request, res: Response) => {
+    const {id} = req.params;
+
+const bookIndex = books.findIndex(book => book.id === parseInt(String(id)));
+
+if(bookIndex === -1){
+    return res.status(404).json({message: "Author not found"});
+
+}
+
+const deleteAuthor = books.splice(bookIndex, 1);
+
+res.status(200).json(deleteAuthor[0]);
+
 }
 
