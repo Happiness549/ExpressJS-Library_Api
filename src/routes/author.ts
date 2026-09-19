@@ -19,6 +19,7 @@ router.post("/",[
     body("name").notEmpty().withMessage("Name is required"),
     body("surname").notEmpty().withMessage("Surname is required"),    
 ], (req: Request, res: Response) => {
+    console.log(req.body);
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()});

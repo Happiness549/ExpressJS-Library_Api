@@ -21,9 +21,9 @@ export const getAuthorById = (req:Request, res:Response) => {
 
 export const createAuthor = (req: Request, res: Response) =>{
     const {name, surname} =req.body;
-    const newUser:Author  = {id: authors.length + 1, name, surname};
-    authors.push(newUser);
-    res.status(201).json(newUser);
+    const newAuthor:Author  = {id: authors.length + 1, name, surname};
+    authors.push(newAuthor);
+    res.status(201).json(newAuthor);
 }
 
 export const updateAuthor = (req: Request, res: Response) => {
