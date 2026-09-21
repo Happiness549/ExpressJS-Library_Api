@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { body, param, validationResult } from "express-validator";
 import {getAllAuthors, createAuthor, getAuthorById, updateAuthor, deleteAuthor} from '../controllers/author'
+import { getBookByAuthorId } from '../controllers/author';
 
 const router = Router();
 
@@ -14,6 +15,18 @@ router.get("/:id", [param("id").isInt().withMessage("Id must be an integar")],(r
     }
     getAuthorById(req,res)
 })
+
+router.get("/:id/books", 
+    [param("id").isInt().withMessage("Id must be an integar")
+    ],(req: Request, res: Response) => {
+    const errors = validationResult(req);  
+    console.log(errors, "There was an error");
+
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array() });
+    }
+    getBookByAuthorId(req,res)
+});
 
 router.post("/",[
     body("name").notEmpty().withMessage("Name is required"),

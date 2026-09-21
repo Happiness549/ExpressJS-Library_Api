@@ -6,22 +6,22 @@ This project is a RESTful API for a local community library system. It manages t
 
 The API allows users to:
 
-* Create, view, update, and delete authors.
-* Create, view, update, and delete books.
-* Link each book to an author using `authorId`.
-* View all books belonging to a specific author.
-* Validate input data.
-* Handle errors such as invalid data, missing resources, and duplicate books.
+- Create, view, update, and delete authors.
+- Create, view, update, and delete books.
+- Link each book to an author using `authorId`.
+- View all books belonging to a specific author.
+- Validate input data.
+- Handle errors such as invalid data, missing resources, and duplicate books.
 
 The project uses **in-memory arrays** to store the data instead of a database.
 
 ## Tech Stack
 
-* Node.js
-* Express.js
-* TypeScript
-* Express Validator
-* Postman
+- Node.js
+- Express.js
+- TypeScript
+- Express Validator
+- Postman
 
 ## Installation and Setup
 

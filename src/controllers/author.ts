@@ -1,5 +1,6 @@
 import {Request, Response} from 'express'
 import { Author, authors } from '../models/author'
+import { books } from '../models/books'
 
 
 
@@ -20,12 +21,32 @@ export const getAuthorById = (req:Request, res:Response) => {
 
 }
 
+
 export const createAuthor = (req: Request, res: Response) =>{
     const {name, surname} =req.body;
     const newAuthor:Author  = {id: authors.length + 1, name, surname};
     authors.push(newAuthor);
     res.status(201).json(newAuthor);
 }
+
+export const getBookByAuthorId = (req: Request, res: Response) => {
+    const {id} = req.params;
+    const authorBooks = books.filter(book => book.authorId === parseInt(String(id)));
+
+    if(!authorBooks){
+        return res.status(404).json({message: "Author not found"});
+    }
+    res.status(200).json(authorBooks);
+}
+
+// export const getBookByAuthorId = (req: Request, res: Response) => {
+//     const {id} = req.params;
+//     const author = authors.find(author => author.id === parseInt(String(id)));
+//     if(!author){
+//         return res.status(404).json({message: "Author not found"});
+//     }
+//     res.status(200).json(author);
+// };
 
 export const updateAuthor = (req: Request, res: Response) => {
 
@@ -41,6 +62,8 @@ export const updateAuthor = (req: Request, res: Response) => {
     res.status(200).json(author)
   
 }
+
+
 
 export const deleteAuthor = (req: Request, res: Response) => {
     const {id} = req.params;
