@@ -28,9 +28,17 @@ router.post("/",[
 }
 );
 
-router.patch("/:id",
-    updateAuthor);
+router.put("/:id",[
+    body("name").notEmpty().withMessage("Name is required"),
+    body("surname").notEmpty().withMessage("Surname is required"),
+], (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array()});
+    }
+    updateAuthor(req,res)
+});
 
-    router.delete("/:id", deleteAuthor);
+router.delete("/:id", deleteAuthor);
 
 export default router;

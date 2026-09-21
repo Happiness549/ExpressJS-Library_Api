@@ -1,8 +1,9 @@
 import {Request, Response} from 'express'
-import { Books } from '../models/books'
-import router from '../routes/author';
+import { Books, books } from '../models/books'
+import { authors } from '../models/author'
 
-let books: Books[] = [];
+
+
 
 export const getAllBooks = (req:Request, res: Response) => {
     res.status(200).json(books)
@@ -22,6 +23,10 @@ export const getAllBooksById = (req: Request, res: Response) => {
 
 export const createBooks = (req: Request, res: Response) => {
     const {title, year, authorId} = req.body;
+    const author = authors.find(author => author.id === parseInt(String(authorId)));
+    if(!author){
+        return res.status(404).json({message: "Author not found"})
+    }
     const newBook:Books = {id: books.length + 1, title, year, authorId }
     books.push(newBook);
     res.status(201).json(newBook)
@@ -34,10 +39,11 @@ export const updateBook = (req: Request, res: Response) => {
     const updates: Partial<Books> = req.body
     
     const author = books.find(author => author.id === parseInt(String(id)));
-    if(!author) return res.status(404).json({message: "Author not found"});
+    if(!author) return res.status(404).json({message: "Book not found"});
 
     if(updates.title !== undefined) author.title = updates.title;
     if (updates.year !== undefined) author.year = updates.year;
+    if (updates.authorId !== undefined) author.authorId = updates.authorId;
 
     res.status(200).json(author)
   
@@ -49,7 +55,7 @@ export const deleteBook = (req: Request, res: Response) => {
 const bookIndex = books.findIndex(book => book.id === parseInt(String(id)));
 
 if(bookIndex === -1){
-    return res.status(404).json({message: "Author not found"});
+    return res.status(404).json({message: "Book not found"});
 
 }
 

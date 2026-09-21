@@ -1,7 +1,8 @@
 import {Request, Response} from 'express'
-import { Author } from '../models/author'
+import { Author, authors } from '../models/author'
 
-let authors: Author[] = [] ;
+
+
 
 export const getAllAuthors = (req:Request, res: Response) => {
     res.status(200).json(authors)
@@ -13,7 +14,7 @@ export const getAuthorById = (req:Request, res:Response) => {
     const author = authors.find((author) =>author.id === parseInt(String(id)));
 
     if(!author){
-        return res.status(404).json({message: "User not found"});
+        return res.status(404).json({message: "Author not found"});
     } 
     res.status(200).json(author);
 

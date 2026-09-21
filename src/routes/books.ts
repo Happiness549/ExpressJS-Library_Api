@@ -44,9 +44,6 @@ bookRouter.put("/:id", [
     updateBook(req, res);
 });
 
-
-
-
 bookRouter.delete("/:id", deleteBook);
 
 export default bookRouter;

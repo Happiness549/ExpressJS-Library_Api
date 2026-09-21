@@ -4,3 +4,4 @@ export interface Author{
     surname: string;
 }
 
+export let authors: Author[] = [] ;

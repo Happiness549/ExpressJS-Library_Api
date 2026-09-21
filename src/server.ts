@@ -10,12 +10,12 @@ const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(notFoundHandler);
 app.use(loggerMiddleware);
 app.use(errorHandler);
-
 app.use("/v1/authors", router);
 app.use("/v2/books", bookRouter);
+app.use(notFoundHandler);
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT} `);
 })

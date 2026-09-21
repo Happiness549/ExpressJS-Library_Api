@@ -4,3 +4,5 @@ export interface Books {
     year: number;
     authorId: number;
 }
+
+export let books: Books[] = [];
